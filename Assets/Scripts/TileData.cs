@@ -29,5 +29,10 @@ namespace GGJ23M
         {
             Type = type;           
         }
+
+        public bool IsNeighbor(TileData tileData)
+        {
+            return hex.IsNeighbor(tileData.hex);
+        }
     }
 }
