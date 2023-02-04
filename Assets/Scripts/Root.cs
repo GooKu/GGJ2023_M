@@ -6,24 +6,36 @@ namespace GGJ23M
 {
     public class Root
     {
+        public enum Level
+        {
+            Main = 0,
+            Sub
+        }
+
         int _energyCost;
-        int _branchLevel;
+        //0:main, 1:sub
+        public Level BranchLevel { get; private set; }
 
         Root _lastRoot;
         List<Root> _childRoots = new();
         Hex _rootHex;
 
-        public Root(Root lastRoot, Hex rootHex, int branchLevel)
+        public Root(Root lastRoot, Hex rootHex, Level branchLevel)
         {
             _lastRoot = lastRoot;
             _rootHex = rootHex;
-            _branchLevel = branchLevel;
+            BranchLevel = branchLevel;
+        }
+
+        public void UpdateLevel(Level level)
+        {
+            BranchLevel = level;
         }
 
         public int CalculateCost()
         {
             //or just return branchLevel
-            switch (_branchLevel)
+            switch (BranchLevel)
             {
                 case 0:
                     _energyCost = 1;
