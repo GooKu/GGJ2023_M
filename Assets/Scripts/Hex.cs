@@ -66,6 +66,24 @@ namespace GGJ23M
             return new Vector2(x, y);
         }
 
+        public bool IsNeighbor(Hex hex)
+        {
+            int checkIndex = hex.row / 2 == 0 ? 0 : 1;
+
+            for (int i = 0; i < 6; i++)
+            {
+                var offset = Directions[checkIndex, i];
+
+                if (hex.row + offset.y == row
+                    && hex.column + offset.x == column)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static Hex PointToHex(Vector2 point, float hexSize)
         {
             float q = (2f / 3f * point.x) / hexSize;
