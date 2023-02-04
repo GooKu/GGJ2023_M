@@ -148,7 +148,7 @@ namespace GGJ23M
             {
                 mainRoot = root;
 
-                var checkIndex = (pos.row & 1) == 0 ? 0 : 1;
+                var checkIndex = (pos.column & 1) == 0 ? 0 : 1;
 
                 var checkVects = new Vector2Int[] { Hex.Directions[checkIndex, 0],
                     Hex.Directions[checkIndex, 4],
