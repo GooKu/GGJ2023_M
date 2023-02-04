@@ -97,6 +97,12 @@ namespace GGJ23M
                 player.AddEnergy(8);
             }
 
+            if (tileData.Type == TileData.TileType.Light)
+            {
+                gameMap.UnlockNextLayer();
+                gameMapView.MoveDown();
+            }
+
             tileData.UpdateType(TileData.TileType.Root);
 
             Root.Level level = Root.Level.Main;
