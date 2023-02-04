@@ -36,14 +36,6 @@ namespace GGJ23M
         private void Update()
         {
             UpdateCamera();
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                MoveUp();
-            }
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                MoveDown();
-            }
         }
 
         public void UpdateTile(Hex pos, TileData.TileType tileType, bool isMain = false)

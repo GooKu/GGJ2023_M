@@ -8,6 +8,9 @@ namespace GGJ23M
         private Vector3 moveVelocity;
         private float sizeVelocity;
 
+        private bool scrolled;
+        private float scrolledTimer;
+
         public void UpdateCamera()
         {
             Vector2 center = GetLayerCenter(currentLayer);
@@ -19,6 +22,32 @@ namespace GGJ23M
             float targetSize = width * 0.5f * Screen.height / Screen.width;
             float size = Mathf.SmoothDamp(mainCamera.orthographicSize, targetSize, ref sizeVelocity, 0.25f);
             mainCamera.orthographicSize = size;
+
+            UpdateScroll();
+        }
+
+        private void UpdateScroll()
+        {
+            if (!scrolled && Input.mouseScrollDelta.y > 0f)
+            {
+                scrolled = true;
+                MoveUp();
+            }
+            if (!scrolled && Input.mouseScrollDelta.y < 0f)
+            {
+                scrolled = true;
+                MoveDown();
+            }
+
+            if (scrolled)
+            {
+                scrolledTimer += Time.deltaTime;
+                if (scrolledTimer > 0.5f)
+                {
+                    scrolled = false;
+                    scrolledTimer = 0f;
+                }
+            }
         }
 
         public void MoveUp()
