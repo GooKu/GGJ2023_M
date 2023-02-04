@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace GGJ23M
 {
-    public class Root : MonoBehaviour
+    public class Root
     {
         int _energyCost;
         int _branchLevel;
 
         Root _lastRoot;
-        List<Root> _childRoots;
+        List<Root> _childRoots = new();
         Hex _rootHex;
 
-
-        public void Init(Root lastRoot, Hex rootHex, int branchLevel)
+        public Root(Root lastRoot, Hex rootHex, int branchLevel)
         {
             _lastRoot = lastRoot;
             _rootHex = rootHex;
             _branchLevel = branchLevel;
         }
+
         public int CalculateCost()
         {
             //or just return branchLevel

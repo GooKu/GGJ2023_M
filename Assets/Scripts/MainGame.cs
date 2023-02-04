@@ -12,6 +12,8 @@ namespace GGJ23M
         private void Awake()
         {
             gameMapView.SetUp();
+            var root = new Root(null, new Hex(), 0);
+            player.AddRoot(root);
         }
     }
 }

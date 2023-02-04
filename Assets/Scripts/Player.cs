@@ -8,7 +8,7 @@ namespace GGJ23M
 
         bool _playerDead;
 
-        List<Root> _roots;
+        private readonly List<Root> _roots = new();
 
         public void AddEnergy(int addValue)
         {
