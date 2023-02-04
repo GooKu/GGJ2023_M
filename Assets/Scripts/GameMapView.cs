@@ -78,9 +78,18 @@ namespace GGJ23M
 
         public void UpdateTile(Hex pos, TileData.TileType tileType)
         {
-            if(tileViews.TryGetValue(pos, out var tile)) { return; }
+            if(!tileViews.TryGetValue(pos, out var tile)) { return; }
 
-            //TODO: 
+            Sprite sprite = null;
+
+            switch (tileType)
+            {
+                case TileData.TileType.Root:
+                    sprite = tileSprites[0];
+                    break;
+            }
+
+            tile.UpdateSprite(sprite);
         }
 
         private float GetLayerWidth(int indexOfLayer)

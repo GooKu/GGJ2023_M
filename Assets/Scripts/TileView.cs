@@ -6,9 +6,9 @@ public class TileView : MonoBehaviour
 {
     private SpriteRenderer render;
 
-    private void Start()
+    private void Awake()
     {
-        GetComponent<SpriteRenderer>();
+        render = GetComponent<SpriteRenderer>();
     }
 
     public void UpdateSprite(Sprite sprite)
