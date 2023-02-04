@@ -14,6 +14,8 @@ namespace GGJ23M
         [SerializeField]
         private List<Vector2Int> sizeEachLayer = new();
 
+        private GameMap gameMap = new();
+
         private void Start()
         {
             SetUp();
@@ -21,6 +23,8 @@ namespace GGJ23M
 
         public void SetUp()
         {
+            gameMap = new GameMap();
+
             int maxWidth = 0;
             int totalHeight = 0;
             for (var i = 0; i < sizeEachLayer.Count; i++)
@@ -49,6 +53,8 @@ namespace GGJ23M
                 for (var j = 0; j < height; j++)
                 {
                     var hex = new Hex(i, j + offsetY);
+                    gameMap.AddTile(new TileData(hex));
+
                     Vector2 point = hex.ToPoint(hexSize);
                     GameObject clone = Instantiate(tilePrefab, point, Quaternion.identity, transform);
                     clone.name = $"hex_{i}_{j}";
