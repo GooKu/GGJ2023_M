@@ -1,42 +1,43 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace GGJ23M
 {
-    int _currentEnergy;
-
-    bool _playerDead;
-
-    List<Root> _roots;
-
-    public void AddEnergy(int addValue)
+    public class Player
     {
-        _currentEnergy += addValue;
-    }
+        int _currentEnergy;
 
-    public void RemoveEnergy(int removeValue)
-    {
-        _currentEnergy -= removeValue;
+        bool _playerDead;
 
-        if(_currentEnergy <= 0)
+        List<Root> _roots;
+
+        public void AddEnergy(int addValue)
         {
-            _playerDead = true;
+            _currentEnergy += addValue;
         }
-    }
 
-    public void AddRoot(Root root) 
-    {
-        _roots.Add(root);
-    }
+        public void RemoveEnergy(int removeValue)
+        {
+            _currentEnergy -= removeValue;
 
-    public List<Root> ReturnRoots()
-    {
-        return _roots;
-    }
+            if (_currentEnergy <= 0)
+            {
+                _playerDead = true;
+            }
+        }
 
-    public bool IfPlayerDead()
-    {
-        return _playerDead;
+        public void AddRoot(Root root)
+        {
+            _roots.Add(root);
+        }
+
+        public List<Root> ReturnRoots()
+        {
+            return _roots;
+        }
+
+        public bool IfPlayerDead()
+        {
+            return _playerDead;
+        }
     }
 }
