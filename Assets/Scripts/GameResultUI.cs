@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameResultUI : MonoBehaviour
@@ -17,5 +18,10 @@ public class GameResultUI : MonoBehaviour
         gameObject.SetActive(true);
         scoreText.text = score.ToString();
         anim.Play(isPass ? "PassEnd" : "NormalEnd");
+    }
+
+    public void Again()
+    {
+        SceneManager.LoadScene(1);
     }
 }
