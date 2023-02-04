@@ -61,5 +61,46 @@ namespace GGJ23M
                 }
             }
         }
+
+        private void Update()
+        {
+            UpdateCamera();
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                MoveUp();
+            }
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                MoveDown();
+            }
+        }
+
+        private float GetLayerWidth(int indexOfLayer)
+        {
+            int hexWidth = sizeEachLayer[indexOfLayer].x;
+            return hexWidth * hexSize;
+        }
+
+        private Vector2 GetLayerCenter(int indexOfLayer)
+        {
+            int offsetY = 0;
+            for (var i = 0; i < sizeEachLayer.Count; i++)
+            {
+                if (i != indexOfLayer)
+                {
+                    offsetY += sizeEachLayer[i].y;
+                    continue;
+                }
+
+                offsetY += sizeEachLayer[i].y / 2;
+                var hex = new Hex(0, offsetY);
+                return hex.ToPoint(hexSize);
+            }
+
+            {
+                var hex = new Hex(0, offsetY);
+                return hex.ToPoint(hexSize);
+            }
+        }
     }
 }
