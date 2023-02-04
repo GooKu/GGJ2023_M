@@ -115,7 +115,7 @@ namespace GGJ23M
                 AudioPlayer.Instance.PlayEffect(6);
                 soundEffectTriggerd = true;
 
-                if(gameMap.MaxUnlockedLayer >= 3)
+                if(gameMap.MaxUnlockedLayer >= layerDatas.Count)
                 {
                     gameUI.ShowEnd(scroe, true);
                 }
@@ -188,7 +188,7 @@ namespace GGJ23M
         {
             if(energy > 0) { return; }
 
-            gameUI.ShowEnd(scroe, gameMap.MaxUnlockedLayer >= 3);
+            gameUI.ShowEnd(scroe, gameMap.MaxUnlockedLayer >= layerDatas.Count);
         }
     }
 }
