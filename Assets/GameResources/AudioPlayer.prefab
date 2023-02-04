@@ -176,7 +176,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _music: {fileID: 7237009004740307657}
   _effect: {fileID: 7237009005875582122}
-  _audioClips: []
+  _audioClips:
+  - {fileID: 8300000, guid: c0c9896ec528d2f4e8ca35e1943c2919, type: 3}
+  - {fileID: 8300000, guid: 395160c6ebdef734fbea7c2400a15283, type: 3}
+  - {fileID: 8300000, guid: 0f30d9a8d095dab4faa4d45512d40ee7, type: 3}
+  - {fileID: 8300000, guid: d94d76ba545ed4643b76ecbc5eafddd9, type: 3}
+  - {fileID: 8300000, guid: cfcdeec4b55d0384b962a3dda9e67f57, type: 3}
+  - {fileID: 8300000, guid: 5c4de9e3c5d1af849acf6928c8a9ade7, type: 3}
+  - {fileID: 8300000, guid: 07216f84a571e864a8ee12ead535d483, type: 3}
 --- !u!1 &7237009005875582123
 GameObject:
   m_ObjectHideFlags: 0

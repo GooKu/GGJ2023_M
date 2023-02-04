@@ -8,7 +8,10 @@ namespace GGJ23M
     public class MainMenu : MonoBehaviour
     {
 
-
+        private void Start()
+        {
+            AudioPlayer.Instance.PlayMusic(0);
+        }
         void Update()
         {
             if (Input.anyKeyDown)
