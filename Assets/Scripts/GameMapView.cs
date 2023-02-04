@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GGJ23M
 {
-    public class GameMap : MonoBehaviour
+    public class GameMapView : MonoBehaviour
     {
         [SerializeField]
         private Camera mainCamera;
