@@ -31,7 +31,7 @@ namespace GGJ23M
             player.EnergyChnageEvent += gameUI.SetEnergyAmount;
             gameUI.SetEnergyAmount(startEnergy);
             gameUI.SetScore(scroe);
-            SetRoot(new Hex(), null);
+            SetRoot(new Hex(), null, Root.Level.Main);
         }
 
         private void Update()
@@ -72,23 +72,30 @@ namespace GGJ23M
             {
                 if (pos.Equals(p))
                 {
-                    SetRoot(pos, mainRoot);
+                    SetRoot(pos, mainRoot, Root.Level.Main);
                     return;
                 }
             }
 
+            var roots = new List<Root>();
+
             foreach (var r in player.ReturnRoots())
             {
-                //                Debug.Log($"{r.ReturnHex()}, {r.ReturnHex().IsNeighbor(pos)}");
-                if (r.ReturnHex().IsNeighbor(pos) && r != mainRoot)
+                roots.Add(r);
+            }
+
+            foreach (var r in roots)
+            {
+                //Debug.Log($"{r.ReturnHex()}, {r.ReturnHex().IsNeighbor(pos)}");
+                if (r.ReturnHex().IsNeighbor(pos))
                 {
-                    SetRoot(pos, r);
+                    SetRoot(pos, r, Root.Level.Sub);
                     return;
                 }
             }
         }
 
-        private void SetRoot(Hex pos, Root parent)
+        private void SetRoot(Hex pos, Root parent, Root.Level level)
         {
             var tileData = gameMap.GetTile(pos);
 
@@ -105,12 +112,9 @@ namespace GGJ23M
 
             tileData.UpdateType(TileData.TileType.Root);
 
-            Root.Level level = Root.Level.Main;
-
             if (parent != null)
             {
                 //Debug.Log($"{pos}, root:{parent.ReturnHex()}, {parent.BranchLevel}");
-                level = parent.BranchLevel;
                 scroe++;
                 gameUI.SetScore(scroe);
             }
