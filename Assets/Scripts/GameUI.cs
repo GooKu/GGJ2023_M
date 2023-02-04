@@ -9,6 +9,8 @@ namespace GGJ23M
         private TextMeshProUGUI energyText;
         [SerializeField]
         private TextMeshProUGUI scoreText;
+        [SerializeField]
+        private GameResultUI resultUI;
 
         public void SetEnergyAmount(int amount)
         {
@@ -18,6 +20,11 @@ namespace GGJ23M
         public void SetScore(int score)
         {
             scoreText.text = $"Score: {score}";
+        }
+
+        public void ShowEnd(int score, bool isPass)
+        {
+            resultUI.Show(score, isPass);
         }
     }
 }
