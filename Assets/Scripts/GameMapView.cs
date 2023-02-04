@@ -50,7 +50,13 @@ namespace GGJ23M
                     break;
                 case TileData.TileType.Root:
                     tile.SetType(tileType);
-                    int index = isMain ? 0 : 1;
+                    if (pos == new Hex())
+                    {
+                        tile.UpdateSprite(0);
+                        break;
+                    }
+
+                    int index = isMain ? 1 : 2;
                     tile.UpdateSprite(index);
                     break;
             }
