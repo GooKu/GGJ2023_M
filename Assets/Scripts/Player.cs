@@ -8,7 +8,7 @@ namespace GGJ23M
 
         int _currentEnergy;
 
-        bool _playerDead;
+        public bool IfPlayerDead => _currentEnergy <= 0;
 
         private readonly List<Root> _roots = new();
 
@@ -27,11 +27,6 @@ namespace GGJ23M
         {
             _currentEnergy -= removeValue;
 
-            if (_currentEnergy <= 0)
-            {
-                _playerDead = true;
-            }
-
             EnergyChnageEvent?.Invoke(_currentEnergy);
         }
 
@@ -45,9 +40,5 @@ namespace GGJ23M
             return _roots;
         }
 
-        public bool IfPlayerDead()
-        {
-            return _playerDead;
-        }
     }
 }

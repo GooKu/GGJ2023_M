@@ -37,7 +37,7 @@ namespace GGJ23M
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !player.IfPlayerDead())
+            if (Input.GetMouseButtonDown(0) && !player.IfPlayerDead)
             {
                 InputHandle();
             }
