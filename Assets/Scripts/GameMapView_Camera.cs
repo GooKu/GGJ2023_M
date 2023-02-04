@@ -14,12 +14,12 @@ namespace GGJ23M
         public void UpdateCamera()
         {
             Vector2 center = GetLayerCenter(currentLayer);
-            Vector3 position = Vector3.SmoothDamp(mainCamera.transform.position, center, ref moveVelocity, 0.25f);
+            Vector3 position = Vector3.SmoothDamp(mainCamera.transform.position, center, ref moveVelocity, 0.8f);
             position.z = mainCamera.transform.position.z;
             mainCamera.transform.position = position;
 
             float targetSize = GetCameraTargetSize();
-            float size = Mathf.SmoothDamp(mainCamera.orthographicSize, targetSize, ref sizeVelocity, 0.25f);
+            float size = Mathf.SmoothDamp(mainCamera.orthographicSize, targetSize, ref sizeVelocity, 0.8f);
             mainCamera.orthographicSize = size;
 
             UpdateScroll();
