@@ -64,7 +64,22 @@ namespace GGJ23M
             }
 
             int hexWidth = layerDatas[indexOfLayer].size.x;
-            return hexWidth * hexSize * 1.5f + hexSize * 0.5f;
+            float width = hexWidth * hexSize * 1.5f + hexSize * 0.5f;
+            width += 0.5f;  // Bleed
+            return width;
+        }
+
+        private float GetLayerHeight(int indexOfLayer)
+        {
+            if (layerDatas == null)
+            {
+                return 0f;
+            }
+
+            int hexHeight = layerDatas[indexOfLayer].size.y;
+            float height = (hexHeight + 1) * hexSize * Mathf.Sqrt(3);
+            height += 0.5f;  // Bleed
+            return height;
         }
 
         private Vector2 GetLayerCenter(int indexOfLayer)

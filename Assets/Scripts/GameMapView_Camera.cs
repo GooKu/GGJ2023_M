@@ -18,12 +18,22 @@ namespace GGJ23M
             position.z = mainCamera.transform.position.z;
             mainCamera.transform.position = position;
 
-            float width = GetLayerWidth(currentLayer);
-            float targetSize = width * 0.5f * Screen.height / Screen.width;
+            float targetSize = GetCameraTargetSize();
             float size = Mathf.SmoothDamp(mainCamera.orthographicSize, targetSize, ref sizeVelocity, 0.25f);
             mainCamera.orthographicSize = size;
 
             UpdateScroll();
+        }
+
+        private float GetCameraTargetSize()
+        {
+            float width = GetLayerWidth(currentLayer);
+            float targetSizeForWidth = width * 0.5f * Screen.height / Screen.width;
+
+            float height = GetLayerHeight(currentLayer);
+            float targetSizeForHeight = height * 0.5f;
+
+            return Mathf.Max(targetSizeForWidth, targetSizeForHeight);
         }
 
         private void UpdateScroll()
