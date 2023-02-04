@@ -68,7 +68,7 @@ namespace GGJ23M
 
         public bool IsNeighbor(Hex hex)
         {
-            int checkIndex = (hex.row & 1) == 0 ? 0 : 1;
+            int checkIndex = (hex.column & 1) == 0 ? 0 : 1;
 
             for (int i = 0; i < 6; i++)
             {

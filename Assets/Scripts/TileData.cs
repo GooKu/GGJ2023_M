@@ -16,17 +16,6 @@ namespace GGJ23M
 
         public TileType Type { get; private set; }
 
-        public enum RootableType
-        {
-            Invalid,
-            Main,
-            Sub,
-        }
-
-        public RootableType Rootable { get; private set; }
-
-        public Root Parent { get; private set; }
-
         public TileData(Hex hex)
         {
             this.hex = hex;
@@ -40,20 +29,6 @@ namespace GGJ23M
         public void UpdateType(TileType type)
         {
             Type = type; 
-            if(type == TileType.Root)
-            {
-                UpdateRootableType(RootableType.Invalid);
-            }
-        }
-
-        public void UpdateRootableType(RootableType type)
-        {
-            Rootable = type;
-        }
-
-        public void SetParent(Root parent)
-        {
-            Parent = parent;
         }
 
         public bool IsNeighbor(TileData tileData)

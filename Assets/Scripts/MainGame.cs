@@ -13,6 +13,9 @@ namespace GGJ23M
         private Player player = new();
         private GameMap gameMap;
 
+        private Root mainRoot;
+        private Hex[] mainEmpty = new Hex[3];
+
         private void Awake()
         {
             gameMap = BuildGameMap(layerDatas);
@@ -86,14 +89,36 @@ namespace GGJ23M
             Hex pos = Hex.PointToHex(worldPosition, gameMapView.GetHexSize());
             var tileData = gameMap.GetTile(pos);
 
-            if (tileData == null
-                || tileData.Rootable == TileData.RootableType.Invalid)
+            if (tileData == null)
             {
                 return;
             }
 
-            SetRoot(pos, tileData.Parent);
+            switch (tileData.Type)
+            {
+                case TileData.TileType.Obstacle:
+                case TileData.TileType.Root:
+                    return;
+            }
 
+            foreach(var p in mainEmpty)
+            {
+                if(pos.Equals(p))
+                {
+                    SetRoot(pos, mainRoot);
+                    return;
+                }
+            }
+
+            foreach (var r in player.ReturnRoots())
+            {
+//                Debug.Log($"{r.ReturnHex()}, {r.ReturnHex().IsNeighbor(pos)}");
+                if (r.ReturnHex().IsNeighbor(pos) && r != mainRoot)
+                {
+                    SetRoot(pos, r);
+                    return;
+                }
+            }
         }
 
         private void SetRoot(Hex pos, Root parent)
@@ -105,86 +130,36 @@ namespace GGJ23M
 
             if (parent != null)
             {
+                //Debug.Log($"{pos}, root:{parent.ReturnHex()}, {parent.BranchLevel}");
                 level = parent.BranchLevel;
-                tileData.SetParent(parent);
             }
 
             gameMapView.UpdateTile(pos, TileData.TileType.Root, level == Root.Level.Main);
 
             var root = new Root(parent, pos, level);
 
+            if (level == Root.Level.Main)
+            {
+                mainRoot = root;
 
-            #region update arounding tiles
-            #endregion
-            int checkIndex = 0;
+                var checkIndex = (pos.row & 1) == 0 ? 0 : 1;
+
+                var checkVects = new Vector2Int[] { Hex.Directions[checkIndex, 0],
+                    Hex.Directions[checkIndex, 4],
+                    Hex.Directions[checkIndex, 5]
+                };
+
+                for (int i = 0; i < checkVects.Length; i++)
+                {
+                    var offset = checkVects[i];
+                    var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
+                    mainEmpty[i] = checkPos;
+                }
+            }
 
             if (parent != null)
             {
                 parent.UpdateLevel(Root.Level.Sub);
-
-                checkIndex = (pos.row & 1) == 0 ? 0 : 1;
-
-                for (int i = 0; i < 6; i++)
-                {
-                    var offset = Hex.Directions[checkIndex, i];
-
-                    var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
-                    var neighborTile = gameMap.GetTile(checkPos);
-
-                    if (neighborTile == null
-                        || neighborTile.Rootable == TileData.RootableType.Main)
-                    {
-                        continue;
-                    }
-
-                    neighborTile.UpdateRootableType(TileData.RootableType.Sub);
-                }
-            }
-
-            checkIndex = (pos.row & 1) == 0 ? 0 : 1;
-            var checkVects = new Vector2Int[] { Hex.Directions[checkIndex, 0],
-                Hex.Directions[checkIndex, 4],
-                Hex.Directions[checkIndex, 5]
-            };
-
-            for (int i = 0; i < checkVects.Length; i++)
-            {
-                var offset = checkVects[i];
-                var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
-                var checkTile = gameMap.GetTile(checkPos);
-
-                if (checkTile == null
-                    || checkTile.Type == TileData.TileType.Obstacle
-                    || checkTile.Rootable == TileData.RootableType.Main)
-                {
-                    continue;
-                }
-
-                checkTile.UpdateRootableType(level == Root.Level.Main ? TileData.RootableType.Main : TileData.RootableType.Sub);
-                checkTile.SetParent(root);
-            }
-
-            checkVects = new Vector2Int[] { Hex.Directions[checkIndex, 1],
-                Hex.Directions[checkIndex, 2],
-                Hex.Directions[checkIndex, 3]
-            };
-
-            for (int i = 0; i < checkVects.Length; i++)
-            {
-                var offset = checkVects[i];
-                var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
-                var checkTile = gameMap.GetTile(checkPos);
-
-                if (checkTile == null || checkTile.Type == TileData.TileType.Obstacle)
-                {
-                    continue;
-                }
-
-                checkTile.UpdateRootableType(TileData.RootableType.Sub);
-                if (checkTile.Parent == null)
-                {
-                    checkTile.SetParent(root);
-                }
             }
 
             player.AddRoot(root);
