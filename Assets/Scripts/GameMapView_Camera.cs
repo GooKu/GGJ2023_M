@@ -16,7 +16,7 @@ namespace GGJ23M
             mainCamera.transform.position = position;
 
             float width = GetLayerWidth(currentLayer);
-            float targetSize = width * Screen.height / Screen.width;
+            float targetSize = width * 0.5f * Screen.height / Screen.width;
             float size = Mathf.SmoothDamp(mainCamera.orthographicSize, targetSize, ref sizeVelocity, 0.25f);
             mainCamera.orthographicSize = size;
         }

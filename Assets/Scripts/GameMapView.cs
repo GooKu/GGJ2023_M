@@ -77,7 +77,7 @@ namespace GGJ23M
         private float GetLayerWidth(int indexOfLayer)
         {
             int hexWidth = sizeEachLayer[indexOfLayer].x;
-            return hexWidth * hexSize;
+            return hexWidth * hexSize * 1.5f + hexSize * 0.5f;
         }
 
         private Vector2 GetLayerCenter(int indexOfLayer)
