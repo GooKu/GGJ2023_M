@@ -64,3 +64,5 @@ MonoBehaviour:
     tileId: 3
   - position: {x: 4, y: 25}
     tileId: 3
+  - position: {x: -3, y: 32}
+    tileId: 5

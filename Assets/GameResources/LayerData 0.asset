@@ -20,3 +20,5 @@ MonoBehaviour:
     tileId: 3
   - position: {x: -1, y: 2}
     tileId: 3
+  - position: {x: 1, y: 2}
+    tileId: 5

@@ -36,3 +36,5 @@ MonoBehaviour:
     tileId: 3
   - position: {x: -2, y: 17}
     tileId: 3
+  - position: {x: -3, y: 16}
+    tileId: 5
