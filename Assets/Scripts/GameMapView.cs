@@ -11,19 +11,18 @@ namespace GGJ23M
         private GameObject tilePrefab;
         [SerializeField]
         private float hexSize = 1f;
-        [SerializeField]
+
         private List<Vector2Int> sizeEachLayer = new();
 
-        private GameMap gameMap = new();
         private Dictionary<Hex, TileView> tileViews = new();
 
         private void Start()
         {
         }
 
-        public void SetUp()
+        public void SetUp(List<Vector2Int> sizeEachLayer)
         {
-            gameMap = new GameMap();
+            this.sizeEachLayer = sizeEachLayer;
 
             int maxWidth = 0;
             int totalHeight = 0;
@@ -53,7 +52,6 @@ namespace GGJ23M
                 for (var j = 0; j < height; j++)
                 {
                     var hex = new Hex(i, j + offsetY);
-                    gameMap.AddTile(new TileData(hex));
 
                     Vector2 point = hex.ToPoint(hexSize);
                     GameObject clone = Instantiate(tilePrefab, point, Quaternion.identity, transform);
@@ -73,10 +71,6 @@ namespace GGJ23M
             if (Input.GetKeyDown(KeyCode.X))
             {
                 MoveDown();
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                InputHandle();
             }
         }
 
@@ -107,5 +101,7 @@ namespace GGJ23M
                 return hex.ToPoint(hexSize);
             }
         }
+
+        public float GetHexSize() { return hexSize; }
     }
 }

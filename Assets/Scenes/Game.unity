@@ -153,6 +153,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMapView: {fileID: 1961738067}
+  sizeEachLayer:
+  - {x: 3, y: 3}
+  - {x: 5, y: 5}
+  - {x: 7, y: 7}
+  - {x: 9, y: 15}
+  tileSprites: []
 --- !u!4 &378445648
 Transform:
   m_ObjectHideFlags: 0
