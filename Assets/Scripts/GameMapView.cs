@@ -15,10 +15,10 @@ namespace GGJ23M
         private List<Vector2Int> sizeEachLayer = new();
 
         private GameMap gameMap = new();
+        private Dictionary<Hex, TileView> tileViews = new();
 
         private void Start()
         {
-            SetUp();
         }
 
         public void SetUp()
@@ -58,6 +58,7 @@ namespace GGJ23M
                     Vector2 point = hex.ToPoint(hexSize);
                     GameObject clone = Instantiate(tilePrefab, point, Quaternion.identity, transform);
                     clone.name = $"hex_{i}_{j}";
+                    tileViews.Add(hex, clone.GetComponent<TileView>());
                 }
             }
         }
