@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMapView: {fileID: 1961738067}
+  gameUI: {fileID: 1679569208}
   layerDatas:
   - {fileID: 11400000, guid: 7220598077f97bc4e8672270658355f9, type: 2}
   - {fileID: 11400000, guid: 4eec036cb4bfb4548a2c548b8be1c394, type: 2}
@@ -415,6 +416,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 496f0cb8a4be130429f0991871c4a51d, type: 3}
+--- !u!114 &1679569208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6712627605941996170, guid: 496f0cb8a4be130429f0991871c4a51d, type: 3}
+  m_PrefabInstance: {fileID: 1679569207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc01c2a6d1048a45834d6ecfb385c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1821627616
 GameObject:
   m_ObjectHideFlags: 0

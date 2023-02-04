@@ -8,9 +8,13 @@ namespace GGJ23M
         [SerializeField]
         private GameMapView gameMapView;
         [SerializeField]
+        private GameUI gameUI;
+        [SerializeField]
+        private int startEnergy = 5;
+        [SerializeField]
         private List<ScriptableLayerData> layerDatas = new();
 
-        private Player player = new();
+        private Player player;
         private GameMap gameMap;
 
         private Root mainRoot;
@@ -20,12 +24,15 @@ namespace GGJ23M
         {
             gameMap = BuildGameMap(layerDatas);
             gameMapView.SetUp(gameMap, layerDatas);
+            player = new(startEnergy);
+            player.EnergyChnageEvent += gameUI.SetEnergyAmount;
+            gameUI.SetEnergyAmount(startEnergy);
             SetRoot(new Hex(), null);
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !player.IfPlayerDead())
             {
                 InputHandle();
             }
@@ -162,11 +169,11 @@ namespace GGJ23M
                     mainEmpty[i] = checkPos;
                 }
 
-                player.AddEnergy(-1);
+                player.RemoveEnergy(1);
             }
             else
             {
-                player.AddEnergy(-2);
+                player.RemoveEnergy(2);
             }
 
             if (parent != null)

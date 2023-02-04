@@ -4,15 +4,23 @@ namespace GGJ23M
 {
     public class Player
     {
+        public System.Action<int> EnergyChnageEvent;
+
         int _currentEnergy;
 
         bool _playerDead;
 
         private readonly List<Root> _roots = new();
 
+        public Player(int energy)
+        {
+            _currentEnergy = energy;
+        }
+
         public void AddEnergy(int addValue)
         {
             _currentEnergy += addValue;
+            EnergyChnageEvent?.Invoke(_currentEnergy);
         }
 
         public void RemoveEnergy(int removeValue)
@@ -23,6 +31,8 @@ namespace GGJ23M
             {
                 _playerDead = true;
             }
+
+            EnergyChnageEvent?.Invoke(_currentEnergy);
         }
 
         public void AddRoot(Root root)
