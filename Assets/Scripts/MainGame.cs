@@ -47,15 +47,19 @@ namespace GGJ23M
             int offsetY = 0;
             for (var i = 0; i < layerDatas.Count; i++)
             {
-                BuildLayer(gameMap, layerDatas[i].size.x, layerDatas[i].size.y, offsetY);
+                BuildLayer(gameMap, layerDatas[i], offsetY);
                 offsetY += layerDatas[i].size.y;
             }
 
             return gameMap;
         }
 
-        private static void BuildLayer(GameMap gameMap, int width, int height, int offsetY)
+        private static void BuildLayer(GameMap gameMap, ScriptableLayerData layerData, int offsetY)
         {
+            int width = layerData.size.x;
+            int height = layerData.size.y;
+
+            // Build tiles
             int extend = (width - 1) / 2;
             for (var i = -extend; i <= extend; i++)
             {
@@ -64,6 +68,14 @@ namespace GGJ23M
                     var hex = new Hex(i, j + offsetY);
                     gameMap.AddTile(new TileData(hex));
                 }
+            }
+
+            // Setup tile types
+            for (var i = 0; i < layerData.tiles.Count; i++)
+            {
+                var hex = new Hex(layerData.tiles[i].position.x, layerData.tiles[i].position.y + offsetY);
+                TileData tileData = gameMap.GetTile(hex);
+                tileData.UpdateType((TileData.TileType)layerData.tiles[i].tileId);
             }
         }
 
@@ -93,7 +105,7 @@ namespace GGJ23M
 
             Root.Level level = Root.Level.Main;
 
-            if(parent != null)
+            if (parent != null)
             {
                 level = parent.BranchLevel;
                 tileData.SetParent(parent);
@@ -119,7 +131,7 @@ namespace GGJ23M
                     var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
                     var neighborTile = gameMap.GetTile(checkPos);
 
-                    if(neighborTile == null
+                    if (neighborTile == null
                         || neighborTile.Rootable == TileData.RootableType.Main)
                     {
                         continue;
@@ -135,7 +147,7 @@ namespace GGJ23M
                 Hex.Directions[checkIndex, 5]
             };
 
-            for(int i = 0; i < checkVects.Length; i++)
+            for (int i = 0; i < checkVects.Length; i++)
             {
                 var offset = checkVects[i];
                 var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
@@ -167,7 +179,7 @@ namespace GGJ23M
                 }
 
                 checkTile.UpdateRootableType(TileData.RootableType.Sub);
-                if(checkTile.Parent == null)
+                if (checkTile.Parent == null)
                 {
                     checkTile.SetParent(root);
                 }
