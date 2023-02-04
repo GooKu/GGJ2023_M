@@ -26,6 +26,7 @@ namespace GGJ23M
         {
             gameMap = BuildGameMap(layerDatas);
             gameMapView.SetUp(gameMap, layerDatas);
+            startEnergy++;//++for frist root
             player = new(startEnergy);
             player.EnergyChnageEvent += gameUI.SetEnergyAmount;
             gameUI.SetEnergyAmount(startEnergy);
@@ -94,12 +95,6 @@ namespace GGJ23M
             if (tileData.Type == TileData.TileType.Water)
             {
                 player.AddEnergy(8);
-            }
-
-            if (tileData.Type == TileData.TileType.Light)
-            {
-                gameMap.UnlockNextLayer();
-                gameMapView.MoveDown();
             }
 
             tileData.UpdateType(TileData.TileType.Root);
