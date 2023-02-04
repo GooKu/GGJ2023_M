@@ -29,6 +29,7 @@ namespace GGJ23M
             startEnergy++;//++for frist root
             player = new(startEnergy);
             player.EnergyChnageEvent += gameUI.SetEnergyAmount;
+            player.EnergyChnageEvent += GameEndCheck;
             gameUI.SetEnergyAmount(startEnergy);
             gameUI.SetScore(scroe);
             SetRoot(new Hex(), null, Root.Level.Main);
@@ -113,6 +114,11 @@ namespace GGJ23M
                 gameMapView.MoveDown();
                 AudioPlayer.Instance.PlayEffect(6);
                 soundEffectTriggerd = true;
+
+                if(gameMap.MaxUnlockedLayer >= 3)
+                {
+                    gameUI.ShowEnd(scroe, true);
+                }
             }
 
             tileData.UpdateType(TileData.TileType.Root);
@@ -176,6 +182,13 @@ namespace GGJ23M
             }
 
             player.AddRoot(root);
+        }
+
+        private void GameEndCheck(int energy)
+        {
+            if(energy > 0) { return; }
+
+            gameUI.ShowEnd(scroe, gameMap.MaxUnlockedLayer >= 3);
         }
     }
 }

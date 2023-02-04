@@ -827,6 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyText: {fileID: 6712627605532147503}
   scoreText: {fileID: 6712627607588482314}
+  resultUI: {fileID: 3046693019294554043}
 --- !u!1 &6712627607588482312
 GameObject:
   m_ObjectHideFlags: 0
