@@ -33,4 +33,4 @@ MonoBehaviour:
   - position: {x: 1, y: 8}
     tileId: 3
   - position: {x: 2, y: 9}
-    tileId: 5
+    tileId: 4
