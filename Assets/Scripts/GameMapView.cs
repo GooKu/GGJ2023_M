@@ -14,13 +14,13 @@ namespace GGJ23M
         [SerializeField]
         private Sprite[] tileSprites;
 
-        private List<Vector2Int> sizeEachLayer = new();
+        private List<ScriptableLayerData> layerDatas = new();
 
         private Dictionary<Hex, TileView> tileViews = new();
 
-        public void SetUp(GameMap gameMap, List<Vector2Int> sizeEachLayer)
+        public void SetUp(GameMap gameMap, List<ScriptableLayerData> layerDatas)
         {
-            this.sizeEachLayer = sizeEachLayer;
+            this.layerDatas = layerDatas;
             foreach (TileData tileData in gameMap.AllTileData)
             {
                 var hex = tileData.Position;
@@ -46,7 +46,7 @@ namespace GGJ23M
 
         public void UpdateTile(Hex pos, TileData.TileType tileType)
         {
-            if(!tileViews.TryGetValue(pos, out var tile)) { return; }
+            if (!tileViews.TryGetValue(pos, out var tile)) { return; }
 
             Sprite sprite = null;
 
@@ -62,22 +62,22 @@ namespace GGJ23M
 
         private float GetLayerWidth(int indexOfLayer)
         {
-            int hexWidth = sizeEachLayer[indexOfLayer].x;
+            int hexWidth = layerDatas[indexOfLayer].size.x;
             return hexWidth * hexSize * 1.5f + hexSize * 0.5f;
         }
 
         private Vector2 GetLayerCenter(int indexOfLayer)
         {
             int offsetY = 0;
-            for (var i = 0; i < sizeEachLayer.Count; i++)
+            for (var i = 0; i < layerDatas.Count; i++)
             {
                 if (i != indexOfLayer)
                 {
-                    offsetY += sizeEachLayer[i].y;
+                    offsetY += layerDatas[i].size.y;
                     continue;
                 }
 
-                offsetY += sizeEachLayer[i].y / 2;
+                offsetY += layerDatas[i].size.y / 2;
                 var hex = new Hex(0, offsetY);
                 return hex.ToPoint(hexSize);
             }

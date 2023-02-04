@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2321af050e123984cbf641f7418ea0cf, type: 3}
-  m_Name: new layerData
+  m_Name: LayerData 0
   m_EditorClassIdentifier: 
-  tileData: []
+  size: {x: 3, y: 3}
+  tiles: []

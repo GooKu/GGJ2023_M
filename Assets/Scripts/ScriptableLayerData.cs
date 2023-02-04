@@ -1,20 +1,21 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GGJ23M
 {
-    [CreateAssetMenu(fileName = "new layerData", menuName = "Scriptable Objects/ Layer Data")]
+    [CreateAssetMenu(fileName = "LayerData", menuName = "Scriptable Objects/Layer Data")]
     public class ScriptableLayerData : ScriptableObject
     {
-        public List<TilesInLayer> tileData;
+        public Vector2Int size;
+        public List<TileInLayer> tiles = new();
     }
 
-    [System.Serializable]
-    public class TilesInLayer
+    [Serializable]
+    public class TileInLayer
     {
-        [SerializeField] Vector2Int _tilePos;
-        [SerializeField] int _tileID;
+        public Vector2Int position;
+        public int tileId;
     }
 }
 

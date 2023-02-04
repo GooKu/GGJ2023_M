@@ -8,15 +8,15 @@ namespace GGJ23M
         [SerializeField]
         private GameMapView gameMapView;
         [SerializeField]
-        private List<Vector2Int> sizeEachLayer = new();
+        private List<ScriptableLayerData> layerDatas = new();
 
         private Player player = new();
         private GameMap gameMap;
 
         private void Awake()
         {
-            gameMap = BuildGameMap(sizeEachLayer);
-            gameMapView.SetUp(gameMap, sizeEachLayer);
+            gameMap = BuildGameMap(layerDatas);
+            gameMapView.SetUp(gameMap, layerDatas);
             SetRoot(new Hex());
         }
 
@@ -28,27 +28,27 @@ namespace GGJ23M
             }
         }
 
-        private static GameMap BuildGameMap(List<Vector2Int> sizeEachLayer)
+        private static GameMap BuildGameMap(List<ScriptableLayerData> layerDatas)
         {
             var gameMap = new GameMap();
 
             int maxWidth = 0;
             int totalHeight = 0;
-            for (var i = 0; i < sizeEachLayer.Count; i++)
+            for (var i = 0; i < layerDatas.Count; i++)
             {
-                if (maxWidth < sizeEachLayer[i].x)
+                if (maxWidth < layerDatas[i].size.x)
                 {
-                    maxWidth = sizeEachLayer[i].x;
+                    maxWidth = layerDatas[i].size.x;
                 }
 
-                totalHeight += sizeEachLayer[i].y;
+                totalHeight += layerDatas[i].size.y;
             }
 
             int offsetY = 0;
-            for (var i = 0; i < sizeEachLayer.Count; i++)
+            for (var i = 0; i < layerDatas.Count; i++)
             {
-                BuildLayer(gameMap, sizeEachLayer[i].x, sizeEachLayer[i].y, offsetY);
-                offsetY += sizeEachLayer[i].y;
+                BuildLayer(gameMap, layerDatas[i].size.x, layerDatas[i].size.y, offsetY);
+                offsetY += layerDatas[i].size.y;
             }
 
             return gameMap;

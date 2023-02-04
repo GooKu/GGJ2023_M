@@ -33,9 +33,9 @@ namespace GGJ23M
         public void MoveDown()
         {
             currentLayer++;
-            if (currentLayer >= sizeEachLayer.Count)
+            if (currentLayer >= layerDatas.Count)
             {
-                currentLayer = sizeEachLayer.Count - 1;
+                currentLayer = layerDatas.Count - 1;
             }
         }
     }

@@ -153,11 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMapView: {fileID: 1961738067}
-  sizeEachLayer:
-  - {x: 3, y: 3}
-  - {x: 5, y: 5}
-  - {x: 7, y: 7}
-  - {x: 9, y: 15}
+  layerDatas:
+  - {fileID: 11400000, guid: 7220598077f97bc4e8672270658355f9, type: 2}
+  - {fileID: 11400000, guid: 4eec036cb4bfb4548a2c548b8be1c394, type: 2}
+  - {fileID: 11400000, guid: efb84cb2e80abea42b32a02cd74a5dfe, type: 2}
+  - {fileID: 11400000, guid: 0962dad2a4766db4e8c38c01198f5f71, type: 2}
 --- !u!4 &378445648
 Transform:
   m_ObjectHideFlags: 0
