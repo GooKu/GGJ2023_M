@@ -20,6 +20,8 @@ namespace GGJ23M
         private Root mainRoot;
         private Hex[] mainEmpty = new Hex[3];
 
+        private int scroe = 0;
+
         private void Awake()
         {
             gameMap = BuildGameMap(layerDatas);
@@ -27,6 +29,7 @@ namespace GGJ23M
             player = new(startEnergy);
             player.EnergyChnageEvent += gameUI.SetEnergyAmount;
             gameUI.SetEnergyAmount(startEnergy);
+            gameUI.SetScore(scroe);
             SetRoot(new Hex(), null);
         }
 
@@ -101,6 +104,8 @@ namespace GGJ23M
             {
                 //Debug.Log($"{pos}, root:{parent.ReturnHex()}, {parent.BranchLevel}");
                 level = parent.BranchLevel;
+                scroe++;
+                gameUI.SetScore(scroe);
             }
 
             gameMapView.UpdateTile(pos, TileData.TileType.Root, level == Root.Level.Main);
