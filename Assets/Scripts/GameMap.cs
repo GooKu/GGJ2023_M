@@ -6,6 +6,8 @@ namespace GGJ23M
     {
         private readonly Dictionary<Hex, TileData> mapData = new();
 
+        public IEnumerable<TileData> AllTileData => mapData.Values;
+
         public void AddTile(TileData tileData)
         {
             mapData.Add(tileData.Position, tileData);

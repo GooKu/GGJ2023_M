@@ -18,48 +18,16 @@ namespace GGJ23M
 
         private Dictionary<Hex, TileView> tileViews = new();
 
-        private void Start()
-        {
-        }
-
-        public void SetUp(List<Vector2Int> sizeEachLayer)
+        public void SetUp(GameMap gameMap, List<Vector2Int> sizeEachLayer)
         {
             this.sizeEachLayer = sizeEachLayer;
-
-            int maxWidth = 0;
-            int totalHeight = 0;
-            for (var i = 0; i < sizeEachLayer.Count; i++)
+            foreach (TileData tileData in gameMap.AllTileData)
             {
-                if (maxWidth < sizeEachLayer[i].x)
-                {
-                    maxWidth = sizeEachLayer[i].x;
-                }
-
-                totalHeight += sizeEachLayer[i].y;
-            }
-
-            int offsetY = 0;
-            for (var i = 0; i < sizeEachLayer.Count; i++)
-            {
-                BuildLayer(sizeEachLayer[i].x, sizeEachLayer[i].y, offsetY);
-                offsetY += sizeEachLayer[i].y;
-            }
-        }
-
-        private void BuildLayer(int width, int height, int offsetY)
-        {
-            int extend = (width - 1) / 2;
-            for (var i = -extend; i <= extend; i++)
-            {
-                for (var j = 0; j < height; j++)
-                {
-                    var hex = new Hex(i, j + offsetY);
-
-                    Vector2 point = hex.ToPoint(hexSize);
-                    GameObject clone = Instantiate(tilePrefab, point, Quaternion.identity, transform);
-                    clone.name = $"hex_{i}_{j}";
-                    tileViews.Add(hex, clone.GetComponent<TileView>());
-                }
+                var hex = tileData.Position;
+                Vector2 point = hex.ToPoint(hexSize);
+                GameObject clone = Instantiate(tilePrefab, point, Quaternion.identity, transform);
+                clone.name = $"hex_{hex.column}_{hex.row}";
+                tileViews.Add(hex, clone.GetComponent<TileView>());
             }
         }
 

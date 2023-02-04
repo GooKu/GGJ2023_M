@@ -11,12 +11,12 @@ namespace GGJ23M
         private List<Vector2Int> sizeEachLayer = new();
 
         private Player player = new();
-        private GameMap gameMap = new();
+        private GameMap gameMap;
 
         private void Awake()
         {
-            SetUp(sizeEachLayer);
-            gameMapView.SetUp(sizeEachLayer);
+            gameMap = BuildGameMap(sizeEachLayer);
+            gameMapView.SetUp(gameMap, sizeEachLayer);
             SetRoot(new Hex());
         }
 
@@ -28,9 +28,9 @@ namespace GGJ23M
             }
         }
 
-        public void SetUp(List<Vector2Int> sizeEachLayer)
+        private static GameMap BuildGameMap(List<Vector2Int> sizeEachLayer)
         {
-            gameMap = new GameMap();
+            var gameMap = new GameMap();
 
             int maxWidth = 0;
             int totalHeight = 0;
@@ -47,12 +47,14 @@ namespace GGJ23M
             int offsetY = 0;
             for (var i = 0; i < sizeEachLayer.Count; i++)
             {
-                BuildLayer(sizeEachLayer[i].x, sizeEachLayer[i].y, offsetY);
+                BuildLayer(gameMap, sizeEachLayer[i].x, sizeEachLayer[i].y, offsetY);
                 offsetY += sizeEachLayer[i].y;
             }
+
+            return gameMap;
         }
 
-        private void BuildLayer(int width, int height, int offsetY)
+        private static void BuildLayer(GameMap gameMap, int width, int height, int offsetY)
         {
             int extend = (width - 1) / 2;
             for (var i = -extend; i <= extend; i++)
