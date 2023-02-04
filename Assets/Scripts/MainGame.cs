@@ -99,15 +99,20 @@ namespace GGJ23M
         {
             var tileData = gameMap.GetTile(pos);
 
+            bool soundEffectTriggerd = false;
+
             if (tileData.Type == TileData.TileType.Water)
             {
                 player.AddEnergy(8);
+                AudioPlayer.Instance.PlayEffect(4);
+                soundEffectTriggerd = true;
             }
-
-            if (tileData.Type == TileData.TileType.Light)
+            else if (tileData.Type == TileData.TileType.Light)
             {
                 gameMap.UnlockNextLayer();
                 gameMapView.MoveDown();
+                AudioPlayer.Instance.PlayEffect(6);
+                soundEffectTriggerd = true;
             }
 
             tileData.UpdateType(TileData.TileType.Root);
@@ -142,10 +147,27 @@ namespace GGJ23M
                 }
 
                 player.RemoveEnergy(1);
+
+                if(!soundEffectTriggerd)
+                {
+                    AudioPlayer.Instance.PlayEffect(5);
+                }
             }
             else
             {
                 player.RemoveEnergy(2);
+
+                if (!soundEffectTriggerd)
+                {
+                    if(parent.WasMainRoot)
+                    {
+                        AudioPlayer.Instance.PlayEffect(3);
+                    }
+                    else
+                    {
+                        AudioPlayer.Instance.PlayEffect(5);
+                    }
+                }
             }
 
             if (parent != null)
