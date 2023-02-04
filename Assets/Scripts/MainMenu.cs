@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+namespace GGJ23M
 {
-    
-    
-    void Update()
+    public class MainMenu : MonoBehaviour
     {
-        if (Input.anyKeyDown)
+
+
+        void Update()
         {
-            ChangeScene();
+            if (Input.anyKeyDown)
+            {
+                ChangeScene();
+            }
+        }
+
+        void ChangeScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
-    void ChangeScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
 }
