@@ -12,12 +12,14 @@ namespace GGJ23M
         [SerializeField]
         private float hexSize = 1f;
 
+        private GameMap gameMap;
         private List<ScriptableLayerData> layerDatas;
 
         private Dictionary<Hex, TileView> tileViews = new();
 
         public void SetUp(GameMap gameMap, List<ScriptableLayerData> layerDatas)
         {
+            this.gameMap = gameMap;
             this.layerDatas = layerDatas;
             foreach (TileData tileData in gameMap.AllTileData)
             {

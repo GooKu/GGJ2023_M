@@ -7,8 +7,10 @@ namespace GGJ23M
     {
         private readonly List<ScriptableLayerData> layerDatas;
         private readonly Dictionary<Hex, TileData> mapData = new();
+        private int maxUnlockedLayer = 0;
 
         public IEnumerable<TileData> AllTileData => mapData.Values;
+        public int MaxUnlockedLayer => maxUnlockedLayer;
 
         public GameMap(List<ScriptableLayerData> layerDatas)
         {
@@ -24,7 +26,6 @@ namespace GGJ23M
                 offsetY += layerDatas[i].size.y;
             }
         }
-
 
         private static void BuildLayer(GameMap gameMap, ScriptableLayerData layerData, int offsetY)
         {
@@ -71,6 +72,11 @@ namespace GGJ23M
             }
 
             return null;
+        }
+
+        public void UnlockNextLayer()
+        {
+            maxUnlockedLayer++;
         }
     }
 }

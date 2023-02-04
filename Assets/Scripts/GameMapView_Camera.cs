@@ -33,9 +33,9 @@ namespace GGJ23M
         public void MoveDown()
         {
             currentLayer++;
-            if (currentLayer >= layerDatas.Count)
+            if (currentLayer > gameMap.MaxUnlockedLayer)
             {
-                currentLayer = layerDatas.Count - 1;
+                currentLayer = gameMap.MaxUnlockedLayer;
             }
         }
     }
