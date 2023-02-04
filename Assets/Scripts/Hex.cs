@@ -5,7 +5,7 @@ namespace GGJ23M
 {
     // Use odd-q coordinate.
     // See: https://www.redblobgames.com/grids/hexagons/
-    public struct Hex
+    public struct Hex : IEquatable<Hex>
     {
         public static Vector2Int[,] Directions = new Vector2Int[2, 6] {
             {
@@ -35,6 +35,12 @@ namespace GGJ23M
             this.row = row;
         }
 
+        public bool Equals(Hex other)
+        {
+            return column == other.column &&
+                   row == other.row;
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Hex hex &&
@@ -50,6 +56,16 @@ namespace GGJ23M
         public override string ToString()
         {
             return $"({column}, {row})";
+        }
+
+        public static bool operator ==(Hex a, Hex b)
+        {
+            return a.column == b.column && a.row == b.row;
+        }
+
+        public static bool operator !=(Hex a, Hex b)
+        {
+            return a.column != b.column || a.row != b.row;
         }
 
         public Hex Neighbor(int direction)
