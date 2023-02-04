@@ -83,8 +83,13 @@ namespace GGJ23M
             // Setup tile types
             for (var i = 0; i < layerData.tiles.Count; i++)
             {
-                var hex = new Hex(layerData.tiles[i].position.x, layerData.tiles[i].position.y + offsetY);
+                var hex = new Hex(layerData.tiles[i].position.x, layerData.tiles[i].position.y);
                 TileData tileData = gameMap.GetTile(hex);
+                if (tileData == null)
+                {
+                    Debug.LogWarning($"Tile {hex} not exist");
+                    continue;
+                }
                 tileData.UpdateType((TileData.TileType)layerData.tiles[i].tileId);
             }
         }

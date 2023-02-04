@@ -12,7 +12,7 @@ namespace GGJ23M
         [SerializeField]
         private float hexSize = 1f;
 
-        private List<ScriptableLayerData> layerDatas = new();
+        private List<ScriptableLayerData> layerDatas;
 
         private Dictionary<Hex, TileView> tileViews = new();
 
@@ -64,12 +64,22 @@ namespace GGJ23M
 
         private float GetLayerWidth(int indexOfLayer)
         {
+            if (layerDatas == null)
+            {
+                return 0f;
+            }
+
             int hexWidth = layerDatas[indexOfLayer].size.x;
             return hexWidth * hexSize * 1.5f + hexSize * 0.5f;
         }
 
         private Vector2 GetLayerCenter(int indexOfLayer)
         {
+            if (layerDatas == null)
+            {
+                return new Vector2();
+            }
+
             int offsetY = 0;
             for (var i = 0; i < layerDatas.Count; i++)
             {
