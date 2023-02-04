@@ -9,7 +9,8 @@ namespace GGJ23M
             Empty,
             Root,
             Water,
-            Obstacle
+            Obstacle,
+            Light,
         }
 
         public Hex Position => hex;

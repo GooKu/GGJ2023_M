@@ -97,3 +97,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ab8c11d1be72a48b1e3667a1ccad24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 8537555920145164136}
+  tileSprites:
+  - {fileID: 21300000, guid: 3b988ebb89777e44d841004220a76a31, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  tileObjectPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 7988989494998407418, guid: 924c6d3f7b1dfc94887214b4714373e9, type: 3}
+  - {fileID: 7988989494998407418, guid: 2f74eabc6a31f7f49967f548e7b8dee3, type: 3}
+  - {fileID: 4161115316943463266, guid: 3a2a435936a91d34ca506a2ab6fed679, type: 3}
+  rootSprites:
+  - {fileID: 21300000, guid: 7734b40a690f1b14187722faa2180dc0, type: 3}
+  - {fileID: 21300000, guid: 211df1517465d58478b38b9d71bdaad2, type: 3}

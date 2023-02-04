@@ -289,9 +289,6 @@ MonoBehaviour:
   mainCamera: {fileID: 1079804108}
   tilePrefab: {fileID: 7878089802626533084, guid: c5b4d94f002717b4692abe162472435c, type: 3}
   hexSize: 1
-  tileSprites:
-  - {fileID: 21300000, guid: 7734b40a690f1b14187722faa2180dc0, type: 3}
-  - {fileID: 21300000, guid: 211df1517465d58478b38b9d71bdaad2, type: 3}
 --- !u!4 &1961738068
 Transform:
   m_ObjectHideFlags: 0

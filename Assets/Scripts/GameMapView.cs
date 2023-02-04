@@ -11,8 +11,6 @@ namespace GGJ23M
         private GameObject tilePrefab;
         [SerializeField]
         private float hexSize = 1f;
-        [SerializeField]
-        private Sprite[] tileSprites;
 
         private List<ScriptableLayerData> layerDatas = new();
 
@@ -27,7 +25,9 @@ namespace GGJ23M
                 Vector2 point = hex.ToPoint(hexSize);
                 GameObject clone = Instantiate(tilePrefab, point, Quaternion.identity, transform);
                 clone.name = $"hex_{hex.column}_{hex.row}";
-                tileViews.Add(hex, clone.GetComponent<TileView>());
+                TileView tileView = clone.GetComponent<TileView>();
+                tileView.SetType(tileData.Type);
+                tileViews.Add(hex, tileView);
             }
         }
 
@@ -48,16 +48,18 @@ namespace GGJ23M
         {
             if (!tileViews.TryGetValue(pos, out var tile)) { return; }
 
-            Sprite sprite = null;
-
             switch (tileType)
             {
+                default:
+                    tile.UpdateSprite(-1);
+                    tile.SetType(tileType);
+                    break;
                 case TileData.TileType.Root:
-                    sprite = tileSprites[isMain ? 0:1];
+                    tile.SetType(tileType);
+                    int index = isMain ? 0 : 1;
+                    tile.UpdateSprite(index);
                     break;
             }
-
-            tile.UpdateSprite(sprite);
         }
 
         private float GetLayerWidth(int indexOfLayer)
