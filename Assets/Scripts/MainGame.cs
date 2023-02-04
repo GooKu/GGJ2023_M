@@ -117,7 +117,7 @@ namespace GGJ23M
 
                 if(gameMap.MaxUnlockedLayer >= layerDatas.Count)
                 {
-                    gameUI.ShowEnd(scroe, true);
+                    GameEnd(true);
                 }
             }
 
@@ -188,7 +188,13 @@ namespace GGJ23M
         {
             if(energy > 0) { return; }
 
-            gameUI.ShowEnd(scroe, gameMap.MaxUnlockedLayer >= layerDatas.Count);
+            GameEnd(gameMap.MaxUnlockedLayer >= layerDatas.Count);
+        }
+
+        private void GameEnd(bool isPass)
+        {
+            gameMapView.enabled = false;
+            gameUI.ShowEnd(scroe, isPass);
         }
     }
 }
