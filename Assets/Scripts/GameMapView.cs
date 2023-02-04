@@ -11,6 +11,8 @@ namespace GGJ23M
         private GameObject tilePrefab;
         [SerializeField]
         private float hexSize = 1f;
+        [SerializeField]
+        private Sprite[] tileSprites;
 
         private List<Vector2Int> sizeEachLayer = new();
 
@@ -72,6 +74,13 @@ namespace GGJ23M
             {
                 MoveDown();
             }
+        }
+
+        public void UpdateTile(Hex pos, TileData.TileType tileType)
+        {
+            if(tileViews.TryGetValue(pos, out var tile)) { return; }
+
+            //TODO: 
         }
 
         private float GetLayerWidth(int indexOfLayer)

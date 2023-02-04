@@ -9,8 +9,6 @@ namespace GGJ23M
         private GameMapView gameMapView;
         [SerializeField]
         private List<Vector2Int> sizeEachLayer = new();
-        [SerializeField]
-        private Sprite[] tileSprites;
 
         private Player player = new();
         private GameMap gameMap = new();
@@ -19,8 +17,7 @@ namespace GGJ23M
         {
             SetUp(sizeEachLayer);
             gameMapView.SetUp(sizeEachLayer);
-            var root = new Root(null, new Hex(), 0);
-            player.AddRoot(root);
+            SetRoot(new Hex());
         }
 
         private void Update()
@@ -72,23 +69,23 @@ namespace GGJ23M
         {
             var worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            Hex hex = Hex.PointToHex(worldPosition, gameMapView.GetHexSize());
-            var tileData = gameMap.GetTile(hex);
+            Hex pos = Hex.PointToHex(worldPosition, gameMapView.GetHexSize());
+            var tileData = gameMap.GetTile(pos);
 
             if (tileData == null || tileData.Type == TileData.TileType.Root)
             {
                 return;
             }
 
-            int checkIndex = (hex.row & 1) == 0 ? 0 : 1;
+            int checkIndex = (pos.row & 1) == 0 ? 0 : 1;
 
             for (int i = 0; i < 6; i++)
             {
                 var offset = Hex.Directions[checkIndex, i];
 
-                var pos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
+                var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
 
-                var checkTile = gameMap.GetTile(pos);
+                var checkTile = gameMap.GetTile(checkPos);
 
                 if (checkTile == null)
                 {
@@ -97,13 +94,21 @@ namespace GGJ23M
 
                 if (checkTile.Type == TileData.TileType.Root)
                 {
-                    tileData.UpdateType(TileData.TileType.Root);
-                    //TODO:set root
+                    SetRoot(pos);
                     return;
                 }
             }
         }
 
+        private void SetRoot(Hex pos)
+        {
+            var tileData = gameMap.GetTile(pos);
+            tileData.UpdateType(TileData.TileType.Root);
 
+            gameMapView.UpdateTile(pos, TileData.TileType.Root);
+
+            var root = new Root(null, pos, 0);
+            player.AddRoot(root);
+        }
     }
 }
