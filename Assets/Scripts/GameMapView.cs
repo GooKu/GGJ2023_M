@@ -73,6 +73,10 @@ namespace GGJ23M
             {
                 MoveDown();
             }
+            if (Input.GetMouseButtonDown(0))
+            {
+                InputHandle();
+            }
         }
 
         private float GetLayerWidth(int indexOfLayer)
