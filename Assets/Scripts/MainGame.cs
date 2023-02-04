@@ -40,58 +40,9 @@ namespace GGJ23M
 
         private static GameMap BuildGameMap(List<ScriptableLayerData> layerDatas)
         {
-            var gameMap = new GameMap();
-
-            int maxWidth = 0;
-            int totalHeight = 0;
-            for (var i = 0; i < layerDatas.Count; i++)
-            {
-                if (maxWidth < layerDatas[i].size.x)
-                {
-                    maxWidth = layerDatas[i].size.x;
-                }
-
-                totalHeight += layerDatas[i].size.y;
-            }
-
-            int offsetY = 0;
-            for (var i = 0; i < layerDatas.Count; i++)
-            {
-                BuildLayer(gameMap, layerDatas[i], offsetY);
-                offsetY += layerDatas[i].size.y;
-            }
-
+            var gameMap = new GameMap(layerDatas);
+            gameMap.Initialize();
             return gameMap;
-        }
-
-        private static void BuildLayer(GameMap gameMap, ScriptableLayerData layerData, int offsetY)
-        {
-            int width = layerData.size.x;
-            int height = layerData.size.y;
-
-            // Build tiles
-            int extend = (width - 1) / 2;
-            for (var i = -extend; i <= extend; i++)
-            {
-                for (var j = 0; j < height; j++)
-                {
-                    var hex = new Hex(i, j + offsetY);
-                    gameMap.AddTile(new TileData(hex));
-                }
-            }
-
-            // Setup tile types
-            for (var i = 0; i < layerData.tiles.Count; i++)
-            {
-                var hex = new Hex(layerData.tiles[i].position.x, layerData.tiles[i].position.y);
-                TileData tileData = gameMap.GetTile(hex);
-                if (tileData == null)
-                {
-                    Debug.LogWarning($"Tile {hex} not exist");
-                    continue;
-                }
-                tileData.UpdateType((TileData.TileType)layerData.tiles[i].tileId);
-            }
         }
 
         private void InputHandle()
@@ -113,9 +64,9 @@ namespace GGJ23M
                     return;
             }
 
-            foreach(var p in mainEmpty)
+            foreach (var p in mainEmpty)
             {
-                if(pos.Equals(p))
+                if (pos.Equals(p))
                 {
                     SetRoot(pos, mainRoot);
                     return;
@@ -124,7 +75,7 @@ namespace GGJ23M
 
             foreach (var r in player.ReturnRoots())
             {
-//                Debug.Log($"{r.ReturnHex()}, {r.ReturnHex().IsNeighbor(pos)}");
+                //                Debug.Log($"{r.ReturnHex()}, {r.ReturnHex().IsNeighbor(pos)}");
                 if (r.ReturnHex().IsNeighbor(pos) && r != mainRoot)
                 {
                     SetRoot(pos, r);
@@ -137,7 +88,7 @@ namespace GGJ23M
         {
             var tileData = gameMap.GetTile(pos);
 
-            if(tileData.Type == TileData.TileType.Water)
+            if (tileData.Type == TileData.TileType.Water)
             {
                 player.AddEnergy(8);
             }
