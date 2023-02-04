@@ -124,6 +124,12 @@ namespace GGJ23M
         private void SetRoot(Hex pos, Root parent)
         {
             var tileData = gameMap.GetTile(pos);
+
+            if(tileData.Type == TileData.TileType.Water)
+            {
+                player.AddEnergy(8);
+            }
+
             tileData.UpdateType(TileData.TileType.Root);
 
             Root.Level level = Root.Level.Main;
@@ -155,6 +161,12 @@ namespace GGJ23M
                     var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
                     mainEmpty[i] = checkPos;
                 }
+
+                player.AddEnergy(-1);
+            }
+            else
+            {
+                player.AddEnergy(-2);
             }
 
             if (parent != null)
