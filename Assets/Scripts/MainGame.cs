@@ -101,8 +101,6 @@ namespace GGJ23M
             var tileData = gameMap.GetTile(pos);
             tileData.UpdateType(TileData.TileType.Root);
 
-            gameMapView.UpdateTile(pos, TileData.TileType.Root);
-
             Root.Level level = Root.Level.Main;
 
             if (parent != null)
@@ -110,6 +108,8 @@ namespace GGJ23M
                 level = parent.BranchLevel;
                 tileData.SetParent(parent);
             }
+
+            gameMapView.UpdateTile(pos, TileData.TileType.Root, level == Root.Level.Main);
 
             var root = new Root(parent, pos, level);
 
@@ -153,12 +153,14 @@ namespace GGJ23M
                 var checkPos = new Hex(tileData.Position.column + offset.x, tileData.Position.row + offset.y);
                 var checkTile = gameMap.GetTile(checkPos);
 
-                if (checkTile == null || checkTile.Type == TileData.TileType.Obstacle)
+                if (checkTile == null
+                    || checkTile.Type == TileData.TileType.Obstacle
+                    || checkTile.Rootable == TileData.RootableType.Main)
                 {
                     continue;
                 }
 
-                checkTile.UpdateRootableType(TileData.RootableType.Main);
+                checkTile.UpdateRootableType(level == Root.Level.Main ? TileData.RootableType.Main : TileData.RootableType.Sub);
                 checkTile.SetParent(root);
             }
 

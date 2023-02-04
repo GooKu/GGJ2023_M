@@ -44,7 +44,7 @@ namespace GGJ23M
             }
         }
 
-        public void UpdateTile(Hex pos, TileData.TileType tileType)
+        public void UpdateTile(Hex pos, TileData.TileType tileType, bool isMain = false)
         {
             if (!tileViews.TryGetValue(pos, out var tile)) { return; }
 
@@ -53,7 +53,7 @@ namespace GGJ23M
             switch (tileType)
             {
                 case TileData.TileType.Root:
-                    sprite = tileSprites[0];
+                    sprite = tileSprites[isMain ? 0:1];
                     break;
             }
 
