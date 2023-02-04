@@ -12,15 +12,8 @@ namespace GGJ23M
         {
             AudioPlayer.Instance.PlayMusic(0);
         }
-        void Update()
-        {
-            if (Input.anyKeyDown)
-            {
-                ChangeScene();
-            }
-        }
 
-        void ChangeScene()
+        public void ChangeScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
