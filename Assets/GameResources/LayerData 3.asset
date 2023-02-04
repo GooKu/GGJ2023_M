@@ -13,4 +13,54 @@ MonoBehaviour:
   m_Name: LayerData 3
   m_EditorClassIdentifier: 
   size: {x: 9, y: 15}
-  tiles: []
+  tiles:
+  - position: {x: -4, y: 20}
+    tileId: 2
+  - position: {x: -4, y: 27}
+    tileId: 2
+  - position: {x: 0, y: 21}
+    tileId: 2
+  - position: {x: 1, y: 24}
+    tileId: 2
+  - position: {x: 4, y: 23}
+    tileId: 2
+  - position: {x: -4, y: 29}
+    tileId: 3
+  - position: {x: -3, y: 19}
+    tileId: 3
+  - position: {x: -3, y: 27}
+    tileId: 3
+  - position: {x: -3, y: 29}
+    tileId: 3
+  - position: {x: -3, y: 31}
+    tileId: 3
+  - position: {x: -2, y: 19}
+    tileId: 3
+  - position: {x: -2, y: 28}
+    tileId: 3
+  - position: {x: -2, y: 32}
+    tileId: 3
+  - position: {x: -1, y: 30}
+    tileId: 3
+  - position: {x: 0, y: 31}
+    tileId: 3
+  - position: {x: 1, y: 19}
+    tileId: 3
+  - position: {x: 1, y: 23}
+    tileId: 3
+  - position: {x: 1, y: 25}
+    tileId: 3
+  - position: {x: 2, y: 20}
+    tileId: 3
+  - position: {x: 2, y: 22}
+    tileId: 3
+  - position: {x: 2, y: 24}
+    tileId: 3
+  - position: {x: 2, y: 26}
+    tileId: 3
+  - position: {x: 3, y: 21}
+    tileId: 3
+  - position: {x: 4, y: 24}
+    tileId: 3
+  - position: {x: 4, y: 25}
+    tileId: 3

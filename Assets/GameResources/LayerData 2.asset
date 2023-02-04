@@ -12,5 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2321af050e123984cbf641f7418ea0cf, type: 3}
   m_Name: LayerData 2
   m_EditorClassIdentifier: 
-  size: {x: 7, y: 7}
-  tiles: []
+  size: {x: 7, y: 8}
+  tiles:
+  - position: {x: -2, y: 12}
+    tileId: 2
+  - position: {x: 1, y: 12}
+    tileId: 2
+  - position: {x: 2, y: 15}
+    tileId: 2
+  - position: {x: -1, y: 11}
+    tileId: 3
+  - position: {x: -1, y: 12}
+    tileId: 3
+  - position: {x: 1, y: 14}
+    tileId: 3
+  - position: {x: 2, y: 14}
+    tileId: 3
+  - position: {x: 2, y: 17}
+    tileId: 3
+  - position: {x: -2, y: 15}
+    tileId: 3
+  - position: {x: 2, y: 18}
+    tileId: 3
+  - position: {x: -2, y: 17}
+    tileId: 3
