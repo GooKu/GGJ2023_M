@@ -51,6 +51,7 @@ namespace GGJ23M
         private void CreateNewPool(GameObject key)
         {
             UnityObjectPool<GameObject> pool = new UnityObjectPool<GameObject>(key, 5, false);
+            pool.PoolParent.SetParent(transform);
             pools.Add(key, pool);
         }
 
