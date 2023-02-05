@@ -11,6 +11,8 @@ namespace GGJ23M
         private TextMeshProUGUI scoreText;
         [SerializeField]
         private GameResultUI resultUI;
+        [SerializeField]
+        private Animator hitEffect;
 
         public void SetEnergyAmount(int amount)
         {
@@ -25,6 +27,11 @@ namespace GGJ23M
         public void ShowEnd(int score, bool isPass)
         {
             resultUI.Show(score, isPass);
+        }
+
+        public void ShowHit()
+        {
+            hitEffect.Play("Hit");
         }
     }
 }

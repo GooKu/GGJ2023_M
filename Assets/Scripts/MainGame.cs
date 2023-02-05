@@ -217,6 +217,7 @@ namespace GGJ23M
                     player.RemoveEnergy(5);
                     this.ants.Remove(ant);
                     Destroy(ant);
+                    gameUI.ShowHit();
                 }
             }
 
