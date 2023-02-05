@@ -5,6 +5,9 @@ using UnityEngine;
 namespace GGJ23M {
     public class Ant : MonoBehaviour
     {
+        [SerializeField]
+        private SpriteRenderer render;
+
         public enum Direction
         {
             RD,
@@ -25,7 +28,7 @@ namespace GGJ23M {
         {
             Pos = pos;
             this.hexSize = hexSize;
-            Direct = (Direction)Random.Range(0, 6);
+            UpdateDirection((Direction)Random.Range(0, 6));
         }
 
         public Hex GetNextPost(Direction direction)
@@ -58,7 +61,7 @@ namespace GGJ23M {
                     indexs[swapIndex] = value;
                 }
 
-                bool cantMove = true;
+                bool canNotMove = true;
 
                 for (int i = 0; i < indexs.Count; i++)
                 {
@@ -66,13 +69,13 @@ namespace GGJ23M {
                     var tryPos = GetNextPost(dir);
                     tileData = map.GetTile(tryPos);
                     if (!CanMove(tileData)) { continue; }
-                    Direct = dir;
+                    UpdateDirection(dir);
                     nexPos = tryPos;
-                    cantMove = false;
+                    canNotMove = false;
                     break;
                 }
 
-                if (cantMove)
+                if (canNotMove)
                 {
                     return;
                 }
@@ -94,6 +97,24 @@ namespace GGJ23M {
                 default:
                     return true;
             }
+        }
+
+        public void UpdateDirection(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.LD:
+                case Direction.LU:
+                    render.flipX = true;
+                    break;
+                case Direction.RD:
+                case Direction.RU:
+                    render.flipX = false;
+                    break;
+            }
+
+
+            Direct = direction;
         }
     }
 }
