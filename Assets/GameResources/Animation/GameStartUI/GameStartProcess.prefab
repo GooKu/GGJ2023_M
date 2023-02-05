@@ -99,7 +99,7 @@ MonoBehaviour:
   cutsceneAnimator: {fileID: 795132788547263844}
   image: {fileID: 1153079359174089982}
   sprites:
-  - {fileID: 21300000, guid: 614bd14effbf34e27a687ba17f99a85b, type: 3}
+  - {fileID: 21300000, guid: 4104c764539e04db58326ff853cfb78a, type: 3}
 --- !u!1 &3281052138921563303
 GameObject:
   m_ObjectHideFlags: 0
