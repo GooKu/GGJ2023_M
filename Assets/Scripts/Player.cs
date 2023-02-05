@@ -142,8 +142,14 @@ namespace GGJ23M
                 case 3:
                     tileResult = ThreeConnected(_0, _1, _2, _3, _4, _5);
                     break;
-                default:
+                case 4:
                     tileResult = FourConnected(_0, _1, _2, _3, _4, _5);
+                    break;
+                case 5:
+                    tileResult = FiveConnected(_0, _1, _2, _3, _4, _5);
+                    break;
+                case 6:
+                    tileResult = SixConnected(_0, _1, _2, _3, _4, _5);
                     break;
             }
 
@@ -179,7 +185,8 @@ namespace GGJ23M
 
             if (_0 && _1)
             {
-                
+                tileID = 17;
+                tileAngle = 1;
             }
             else if (_0 && _2)
             {
@@ -198,12 +205,14 @@ namespace GGJ23M
             }
             else if (_0 && _5)
             {
-
+                tileID = 17;
+                tileAngle = 0;
             }
 
             else if(_1 && _2)
             {
-
+                tileID = 17;
+                tileAngle = 2;
             }
             else if(_1 && _3)
             {
@@ -223,7 +232,8 @@ namespace GGJ23M
 
             else if(_2 && _3)
             {
-
+                tileID = 17;
+                tileAngle = 3;
             }
             else if(_2 && _4)
             {
@@ -238,11 +248,18 @@ namespace GGJ23M
 
             else if(_3 && _4)
             {
-
+                tileID = 17;
+                tileAngle = 4;
             }
             else if(_3 && _5)
             {
                 tileID = 4;
+                tileAngle = 5;
+            }
+
+            else if(_4 && _5)
+            {
+                tileID = 17;
                 tileAngle = 5;
             }
             Debug.Log(tileID);
@@ -413,6 +430,52 @@ namespace GGJ23M
                 tileAngle = 4;
             }
 
+            else if(_1 && _0 && _5 && _3)
+            {
+                tileID = 16;
+                tileAngle = 1;
+            }
+            else if(_2 && _1 && _0 && _4)
+            {
+                tileID = 16;
+                tileAngle = 2;
+            }
+            else if(_3 && _2 && _1 && _5)
+            {
+                tileID = 16;
+                tileAngle = 3;
+            }
+            else if(_4 && _3 && _2 && _0)
+            {
+                tileID = 16;
+                tileAngle = 4;
+            }
+            else if(_5 && _4 && _3 && _1)
+            {
+                tileID = 16;
+                tileAngle = 5;
+            }
+            else if(_0 && _5 && _4 && _2)
+            {
+                tileID = 16;
+                tileAngle = 0;
+            }
+
+            return new Vector2Int(tileID, tileAngle);
+        }
+
+        Vector2Int FiveConnected(bool _0, bool _1, bool _2, bool _3, bool _4, bool _5)
+        {
+            int tileID = 18;
+            int tileAngle = 0;
+
+            return new Vector2Int(tileID, tileAngle);
+        }
+
+        Vector2Int SixConnected(bool _0, bool _1, bool _2, bool _3, bool _4, bool _5)
+        {
+            int tileID = 18;
+            int tileAngle = 0;
 
             return new Vector2Int(tileID, tileAngle);
         }
