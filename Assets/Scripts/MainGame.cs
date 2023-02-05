@@ -125,6 +125,7 @@ namespace GGJ23M
             {
                 player.AddEnergy(8);
                 AudioPlayer.Instance.PlayEffect(4);
+                EffectManager.Instance.Play(0, tileData.Position.ToPoint(gameMapView.GetHexSize()));
                 soundEffectTriggerd = true;
             }
             else if (tileData.Type == TileData.TileType.Light)
@@ -132,9 +133,10 @@ namespace GGJ23M
                 gameMap.UnlockNextLayer();
                 gameMapView.MoveDown();
                 AudioPlayer.Instance.PlayEffect(6);
+                EffectManager.Instance.Play(1, tileData.Position.ToPoint(gameMapView.GetHexSize()));
                 soundEffectTriggerd = true;
 
-                if(gameMap.MaxUnlockedLayer >= layerDatas.Count)
+                if (gameMap.MaxUnlockedLayer >= layerDatas.Count)
                 {
                     GameEnd(true);
                 }
@@ -179,7 +181,7 @@ namespace GGJ23M
 
                 player.RemoveEnergy(1);
 
-                if(!soundEffectTriggerd)
+                if (!soundEffectTriggerd)
                 {
                     AudioPlayer.Instance.PlayEffect(5);
                 }
@@ -190,7 +192,7 @@ namespace GGJ23M
 
                 if (!soundEffectTriggerd)
                 {
-                    if(parent.WasMainRoot)
+                    if (parent.WasMainRoot)
                     {
                         AudioPlayer.Instance.PlayEffect(3);
                     }
@@ -232,7 +234,7 @@ namespace GGJ23M
 
         private void GameEndCheck(int energy)
         {
-            if(energy > 0) { return; }
+            if (energy > 0) { return; }
 
             GameEnd(gameMap.MaxUnlockedLayer >= layerDatas.Count);
         }
