@@ -9,6 +9,7 @@ namespace GGJ23M
     {
         public Vector2Int size;
         public List<TileInLayer> tiles = new();
+        public List<Vector2Int> ants = new();
     }
 
     [Serializable]

@@ -13,9 +13,12 @@ namespace GGJ23M
         private int startEnergy = 5;
         [SerializeField]
         private List<ScriptableLayerData> layerDatas = new();
+        [SerializeField]
+        private Ant antSample;
 
         private Player player;
         private GameMap gameMap;
+        private List<Ant> ants = new List<Ant>();
 
         private Root mainRoot;
         private Hex[] mainEmpty = new Hex[3];
@@ -26,6 +29,17 @@ namespace GGJ23M
         {
             gameMap = BuildGameMap(layerDatas);
             gameMapView.SetUp(gameMap, layerDatas);
+            foreach(var l in layerDatas)
+            {
+                foreach(var a in l.ants)
+                {
+                    var hex = new Hex(a.x, a.y);
+                    Vector2 point = hex.ToPoint(gameMapView.GetHexSize());
+                    var ant = Instantiate(antSample, point, Quaternion.identity, transform);
+                    ant.Init(hex, gameMapView.GetHexSize());
+                    ants.Add(ant);
+                }
+            }
             startEnergy++;//++for frist root
             player = new(startEnergy);
             player.EnergyChnageEvent += gameUI.SetEnergyAmount;
@@ -128,6 +142,10 @@ namespace GGJ23M
                 //Debug.Log($"{pos}, root:{parent.ReturnHex()}, {parent.BranchLevel}");
                 scroe++;
                 gameUI.SetScore(scroe);
+                foreach(var ant in ants)
+                {
+                    ant.Move(gameMap);
+                }
             }
 
             gameMapView.UpdateTile(pos, TileData.TileType.Root, level == Root.Level.Main);
@@ -179,6 +197,20 @@ namespace GGJ23M
             if (parent != null)
             {
                 parent.UpdateLevel(Root.Level.Sub);
+                var ants = new List<Ant>();
+
+                foreach(var ant in this.ants)
+                {
+                    ants.Add(ant);
+                }
+
+                foreach (var ant in ants)
+                {
+                    if(pos != ant.Pos) { continue; }
+                    player.RemoveEnergy(5);
+                    this.ants.Remove(ant);
+                    Destroy(ant);
+                }
             }
 
             player.AddRoot(root);
@@ -196,5 +228,6 @@ namespace GGJ23M
             gameMapView.enabled = false;
             gameUI.ShowEnd(scroe, isPass);
         }
+
     }
 }
