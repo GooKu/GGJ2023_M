@@ -15,6 +15,8 @@ namespace GGJ23M
         [SerializeField]
         private Sprite[] rootSprites = new Sprite[0];
 
+        [SerializeField] Color subColor;
+
         private TileData.TileType tileType;
         private GameObject tileObject;
 
@@ -48,13 +50,22 @@ namespace GGJ23M
             }
         }
 
-        public void UpdateSprite(int index)
+        public void UpdateSprite(int index, int angle, bool isMain)
         {
+            //Debug.Log(index);
             if (index == -1)
             {
                 render.sprite = tileSprites[0];
                 return;
             }
+
+            if (!isMain)
+            {
+                render.color = subColor;
+            }
+
+            angle *= 60;
+            transform.rotation = Quaternion.Euler(0, 0, angle);
 
             render.sprite = rootSprites[index];
         }

@@ -153,7 +153,9 @@ namespace GGJ23M
                 }
             }
 
-            gameMapView.UpdateTile(pos, TileData.TileType.Root, level == Root.Level.Main);
+            
+            Vector2Int tileResult = player.CheckNeighbor(pos);
+            gameMapView.UpdateTile(pos, TileData.TileType.Root, tileResult, level == Root.Level.Main);
 
             var root = new Root(parent, pos, level);
 
@@ -219,6 +221,12 @@ namespace GGJ23M
             }
 
             player.AddRoot(root);
+
+            TileResult neighBorsTileResults = player.UpdateNeighbor(pos);
+            for (int i = 0; i < neighBorsTileResults.Results.Count; i++)
+            {
+                gameMapView.UpdateTile(neighBorsTileResults.Hexes[i], TileData.TileType.Root, neighBorsTileResults.Results[i], neighBorsTileResults.root.WasMainRoot);
+            }
         }
 
         private void GameEndCheck(int energy)
@@ -232,6 +240,15 @@ namespace GGJ23M
         {
             gameMapView.enabled = false;
             gameUI.ShowEnd(scroe, isPass);
+
+            if (isPass)
+            {
+                AudioPlayer.Instance.PlayMusic(2);
+            }
+            else
+            {
+                AudioPlayer.Instance.PlayMusic(1);
+            }
         }
 
     }

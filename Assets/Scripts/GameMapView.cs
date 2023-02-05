@@ -38,26 +38,34 @@ namespace GGJ23M
             UpdateCamera();
         }
 
-        public void UpdateTile(Hex pos, TileData.TileType tileType, bool isMain = false)
+        public void UpdateTile(Hex pos, TileData.TileType tileType, Vector2Int tileResult, bool isMain = false)
         {
             if (!tileViews.TryGetValue(pos, out var tile)) { return; }
 
             switch (tileType)
             {
                 default:
-                    tile.UpdateSprite(-1);
+                    tile.UpdateSprite(-1, 4, true);
                     tile.SetType(tileType);
                     break;
                 case TileData.TileType.Root:
                     tile.SetType(tileType);
                     if (pos == new Hex())
                     {
-                        tile.UpdateSprite(0);
+                        tile.UpdateSprite(0, 0, true);
                         break;
                     }
 
                     int index = isMain ? 1 : 2;
-                    tile.UpdateSprite(index);
+                    //tile.UpdateSprite(index);
+                    if(tileResult.x == 0)
+                    {
+                        tile.UpdateSprite(index, 4, isMain);
+                    }
+                    else
+                    {
+                        tile.UpdateSprite(tileResult.x, tileResult.y, isMain);
+                    }
                     break;
             }
         }
