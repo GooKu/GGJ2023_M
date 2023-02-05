@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using static GGJ23M.Root;
-using static UnityEditor.PlayerSettings;
 
 namespace GGJ23M
 {
