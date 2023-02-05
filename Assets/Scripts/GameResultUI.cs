@@ -2,22 +2,33 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameResultUI : MonoBehaviour
+namespace GGJ23M
 {
-    [SerializeField]
-    private Text scoreText;
-    [SerializeField]
-    private Animator anim;
-
-    public void Show(int score, bool isPass)
+    public class GameResultUI : MonoBehaviour
     {
-        gameObject.SetActive(true);
-        scoreText.text = $"Score: {score}";
-        anim.Play(isPass ? "PassEnd" : "NormalEnd");
-    }
+        [SerializeField]
+        private Text scoreText;
+        [SerializeField]
+        private Animator anim;
 
-    public void Again()
-    {
-        SceneManager.LoadScene(1);
+        public void Show(int score, bool isPass)
+        {
+            gameObject.SetActive(true);
+            scoreText.text = $"Score: {score}";
+            anim.Play(isPass ? "PassEnd" : "NormalEnd");
+            if (isPass)
+            {
+                AudioPlayer.Instance.PlayMusic(2);
+            }
+            else
+            {
+                AudioPlayer.Instance.PlayMusic(1);
+            }
+        }
+
+        public void Again()
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }
