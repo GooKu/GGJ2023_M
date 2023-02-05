@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameResultUI : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject summaryRoot;
     [SerializeField]
     private Text scoreText;
     [SerializeField]
@@ -16,7 +12,7 @@ public class GameResultUI : MonoBehaviour
     public void Show(int score, bool isPass)
     {
         gameObject.SetActive(true);
-        scoreText.text = score.ToString();
+        scoreText.text = $"Score: {score}";
         anim.Play(isPass ? "PassEnd" : "NormalEnd");
     }
 
