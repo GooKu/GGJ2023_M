@@ -49,6 +49,11 @@ namespace GGJ23M
             SetRoot(new Hex(), null, Root.Level.Main);
         }
 
+        private void Start()
+        {
+            AudioPlayer.Instance.PlayMusic(0);
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0) && !player.IfPlayerDead)
