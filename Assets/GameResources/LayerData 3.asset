@@ -66,3 +66,9 @@ MonoBehaviour:
     tileId: 3
   - position: {x: -3, y: 32}
     tileId: 4
+  ants:
+  - {x: -3, y: 22}
+  - {x: -3, y: 25}
+  - {x: -3, y: 30}
+  - {x: -2, y: 29}
+  - {x: 3, y: 23}

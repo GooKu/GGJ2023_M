@@ -38,3 +38,6 @@ MonoBehaviour:
     tileId: 3
   - position: {x: -3, y: 16}
     tileId: 4
+  ants:
+  - {x: 0, y: 15}
+  - {x: -3, y: 12}
