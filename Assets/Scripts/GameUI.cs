@@ -16,12 +16,12 @@ namespace GGJ23M
 
         public void SetEnergyAmount(int amount)
         {
-            energyText.text = $"Energy: {amount}";
+            energyText.text = amount.ToString();
         }
 
         public void SetScore(int score)
         {
-            scoreText.text = $"Score: {score}";
+            scoreText.text = score.ToString();
         }
 
         public void ShowEnd(int score, bool isPass)
