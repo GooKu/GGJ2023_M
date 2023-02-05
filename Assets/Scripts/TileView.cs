@@ -52,7 +52,6 @@ namespace GGJ23M
 
         public void UpdateSprite(int index, int angle, bool isMain)
         {
-            //Debug.Log(index);
             if (index == -1)
             {
                 render.sprite = tileSprites[0];

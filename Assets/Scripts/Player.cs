@@ -107,7 +107,7 @@ namespace GGJ23M
                 }
             }
 
-            Debug.Log(targetHex.ToString() + ":" + _0 + "," + _1 + "," + _2 + "," + _3 + "," + _4 + "," + _5);
+            //Debug.Log(targetHex.ToString() + ":" + _0 + "," + _1 + "," + _2 + "," + _3 + "," + _4 + "," + _5);
             tileResult = CalculateTile(_0, _1, _2, _3, _4, _5);
 
             return tileResult;
@@ -262,7 +262,6 @@ namespace GGJ23M
                 tileID = 17;
                 tileAngle = 5;
             }
-            Debug.Log(tileID);
             return new Vector2Int(tileID, tileAngle);
         }
 

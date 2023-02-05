@@ -159,7 +159,7 @@ namespace GGJ23M
             Vector2Int tileResult = player.CheckNeighbor(pos);
             gameMapView.UpdateTile(pos, TileData.TileType.Root, tileResult, level == Root.Level.Main);
 
-            var root = new Root(parent, pos, level);
+            var root = new Root(pos, level);
 
             if (level == Root.Level.Main)
             {
@@ -225,10 +225,10 @@ namespace GGJ23M
 
             player.AddRoot(root);
 
-            TileResult neighBorsTileResults = player.UpdateNeighbor(pos);
-            for (int i = 0; i < neighBorsTileResults.Results.Count; i++)
+            TileResult neighborsTileResults = player.UpdateNeighbor(pos);
+            for (int i = 0; i < neighborsTileResults.Results.Count; i++)
             {
-                gameMapView.UpdateTile(neighBorsTileResults.Hexes[i], TileData.TileType.Root, neighBorsTileResults.Results[i], neighBorsTileResults.root.WasMainRoot);
+                gameMapView.UpdateTile(neighborsTileResults.Hexes[i], TileData.TileType.Root, neighborsTileResults.Results[i], neighborsTileResults.root.WasMainRoot);
             }
         }
 

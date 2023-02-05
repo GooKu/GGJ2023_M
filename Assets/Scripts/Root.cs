@@ -18,15 +18,12 @@ namespace GGJ23M
 
         public bool WasMainRoot => _wasMainRoot;
 
-        Root _lastRoot;
-        List<Root> _childRoots = new();
         Hex _rootHex;
 
         bool _wasMainRoot;
 
-        public Root(Root lastRoot, Hex rootHex, Level branchLevel)
+        public Root(Hex rootHex, Level branchLevel)
         {
-            _lastRoot = lastRoot;
             _rootHex = rootHex;
             BranchLevel = branchLevel;
             _wasMainRoot = branchLevel == Level.Main;

@@ -57,7 +57,6 @@ namespace GGJ23M
                     }
 
                     int index = isMain ? 1 : 2;
-                    //tile.UpdateSprite(index);
                     if(tileResult.x == 0)
                     {
                         tile.UpdateSprite(index, 4, isMain);
