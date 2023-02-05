@@ -33,7 +33,15 @@ namespace GGJ23M
             float height = GetLayerHeight(currentLayer);
             float targetSizeForHeight = height * 0.5f;
 
-            return Mathf.Max(targetSizeForWidth, targetSizeForHeight);
+            float size = Mathf.Max(targetSizeForWidth, targetSizeForHeight);
+
+            // The final size should concern the top UI
+            if (size == targetSizeForHeight)
+            {
+                size *= 1.2f;
+            }
+
+            return size;
         }
 
         private void UpdateScroll()

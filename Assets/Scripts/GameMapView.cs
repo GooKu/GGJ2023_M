@@ -113,12 +113,12 @@ namespace GGJ23M
 
                 offsetY += layerDatas[i].size.y / 2;
                 var hex = new Hex(0, offsetY);
-                return hex.ToPoint(hexSize);
+                return hex.ToPoint(hexSize) + new Vector2(0, 1);
             }
 
             {
                 var hex = new Hex(0, offsetY);
-                return hex.ToPoint(hexSize);
+                return hex.ToPoint(hexSize) + new Vector2(0, 1);
             }
         }
 
