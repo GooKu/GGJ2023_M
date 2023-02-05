@@ -33,7 +33,7 @@ namespace GGJ23M
             Finished?.Invoke();
         }
 
-        public IEnumerator PlaySpriteProcess(Sprite sprite)
+        private IEnumerator PlaySpriteProcess(Sprite sprite)
         {
             image.sprite = sprite;
             cutsceneAnimator.Play("Start");
