@@ -92,7 +92,7 @@ namespace GGJ23M
 
             int hexHeight = layerDatas[indexOfLayer].size.y;
             float height = (hexHeight + 1) * hexSize * Mathf.Sqrt(3);
-            height += 0.5f;  // Bleed
+            height += 2.5f;  // Bleed and UI on top
             return height;
         }
 
