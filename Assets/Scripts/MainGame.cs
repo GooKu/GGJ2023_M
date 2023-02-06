@@ -117,6 +117,11 @@ namespace GGJ23M
 
         private void SetRoot(Hex pos, Root parent, Root.Level level)
         {
+            foreach (var ant in ants)
+            {
+                ant.Move(gameMap);
+            }
+
             var tileData = gameMap.GetTile(pos);
 
             bool soundEffectTriggerd = false;
@@ -149,12 +154,7 @@ namespace GGJ23M
                 //Debug.Log($"{pos}, root:{parent.ReturnHex()}, {parent.BranchLevel}");
                 scroe++;
                 gameUI.SetScore(scroe);
-                foreach(var ant in ants)
-                {
-                    ant.Move(gameMap);
-                }
             }
-
             
             Vector2Int tileResult = player.CheckNeighbor(pos);
             gameMapView.UpdateTile(pos, TileData.TileType.Root, tileResult, level == Root.Level.Main);
@@ -218,7 +218,7 @@ namespace GGJ23M
                     if(pos != ant.Pos) { continue; }
                     player.RemoveEnergy(5);
                     this.ants.Remove(ant);
-                    Destroy(ant);
+                    Destroy(ant.gameObject);
                     gameUI.ShowHit();
                 }
             }
